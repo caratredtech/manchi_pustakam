@@ -1,0 +1,232 @@
+{
+ "doctype": "DocType",
+ "name": "MP Payment Entry",
+ "module": "Manchi Pustakam",
+ "is_submittable": 1,
+ "autoname": "naming_series:",
+ "field_order": [
+  "naming_series",
+  "payment_type",
+  "party_type",
+  "party",
+  "party_name",
+  "column_break_1",
+  "posting_date",
+  "reference_no",
+  "reference_date",
+  "payment_section",
+  "payment_method",
+  "payment_gateway",
+  "mode_of_payment",
+  "column_break_payment",
+  "paid_amount",
+  "gateway_commission",
+  "net_amount",
+  "settlement_section",
+  "settlement_id",
+  "settlement_date",
+  "column_break_settlement",
+  "settlement_status",
+  "reference_section",
+  "references",
+  "accounting_section",
+  "bank_account",
+  "column_break_acc",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PE-.YYYY.-",
+   "reqd": 1,
+   "default": "PE-.YYYY.-"
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "label": "Payment Type",
+   "options": "Receive\nPay",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "\nMP Customer\nMP Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "label": "Party",
+   "options": "party_type",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "label": "Party Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No"
+  },
+  {
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "label": "Reference Date"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "\nCash\nOnline Transfer\nPhone Pe\nRazor Pay\nCheque\nUPI",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_gateway",
+   "fieldtype": "Select",
+   "label": "Payment Gateway",
+   "options": "\nRazor Pay\nPhone Pe",
+   "depends_on": "eval:['Phone Pe', 'Razor Pay'].includes(doc.payment_method)"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Data",
+   "label": "Mode of Payment"
+  },
+  {
+   "fieldname": "column_break_payment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gateway_commission",
+   "fieldtype": "Currency",
+   "label": "Gateway Commission",
+   "default": "0"
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "settlement_section",
+   "fieldtype": "Section Break",
+   "label": "Settlement Details",
+   "depends_on": "eval:doc.payment_gateway"
+  },
+  {
+   "fieldname": "settlement_id",
+   "fieldtype": "Data",
+   "label": "Settlement ID"
+  },
+  {
+   "fieldname": "settlement_date",
+   "fieldtype": "Date",
+   "label": "Settlement Date"
+  },
+  {
+   "fieldname": "column_break_settlement",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "settlement_status",
+   "fieldtype": "Select",
+   "label": "Settlement Status",
+   "options": "Pending\nSettled\nFailed",
+   "default": "Pending"
+  },
+  {
+   "fieldname": "reference_section",
+   "fieldtype": "Section Break",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "references",
+   "fieldtype": "Text",
+   "label": "Invoice References"
+  },
+  {
+   "fieldname": "accounting_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Data",
+   "label": "Bank Account"
+  },
+  {
+   "fieldname": "column_break_acc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "actions": [],
+ "links": [],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "MP Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "MP User",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,170 @@
+{
+ "doctype": "DocType",
+ "name": "Payment Gateway Settlement",
+ "module": "Manchi Pustakam",
+ "is_submittable": 1,
+ "autoname": "naming_series:",
+ "field_order": [
+  "naming_series",
+  "gateway",
+  "settlement_date",
+  "settlement_id",
+  "column_break_1",
+  "from_date",
+  "to_date",
+  "status",
+  "transactions_section",
+  "total_transactions",
+  "total_amount",
+  "column_break_trans",
+  "total_commission",
+  "net_settlement_amount",
+  "reconciliation_section",
+  "reconciled_transactions",
+  "unreconciled_transactions",
+  "notes_section",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PGS-.YYYY.-",
+   "reqd": 1,
+   "default": "PGS-.YYYY.-"
+  },
+  {
+   "fieldname": "gateway",
+   "fieldtype": "Select",
+   "label": "Payment Gateway",
+   "options": "\nRazor Pay\nPhone Pe",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "settlement_date",
+   "fieldtype": "Date",
+   "label": "Settlement Date",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "settlement_id",
+   "fieldtype": "Data",
+   "label": "Settlement ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nReconciled\nPartially Reconciled\nUnreconciled",
+   "default": "Draft"
+  },
+  {
+   "fieldname": "transactions_section",
+   "fieldtype": "Section Break",
+   "label": "Settlement Summary"
+  },
+  {
+   "fieldname": "total_transactions",
+   "fieldtype": "Int",
+   "label": "Total Transactions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Transaction Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_trans",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_commission",
+   "fieldtype": "Currency",
+   "label": "Total Commission",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_settlement_amount",
+   "fieldtype": "Currency",
+   "label": "Net Settlement Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reconciliation_section",
+   "fieldtype": "Section Break",
+   "label": "Reconciliation Status"
+  },
+  {
+   "fieldname": "reconciled_transactions",
+   "fieldtype": "Int",
+   "label": "Reconciled Transactions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unreconciled_transactions",
+   "fieldtype": "Int",
+   "label": "Unreconciled Transactions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "actions": [],
+ "links": [],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "MP Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "MP User",
+   "read": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
