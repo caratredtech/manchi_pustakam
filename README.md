@@ -3,7 +3,7 @@
 A comprehensive Frappe-based application for managing book publishing and distribution operations for **Manchi Pustakam**, a Telugu children's book publisher and distributor.
 
 ## 📚 Overview
-
+caratRED
 Manchi Pustakam is a complete custom ERP solution built on the Frappe Framework to manage:
 - Book inventory (published and distributed titles)
 - Multi-channel sales (Counter, Website, Exhibition, Institutional)
