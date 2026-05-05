@@ -101,9 +101,36 @@ def get_quotation_data(doc, method=None):
     doc.base_in_words = money_in_words(doc.base_rounded_total)
     
     
-    
+@frappe.whitelist()
+def get_purchase_invoice_data(doc, method=None):
+    if doc.docstatus != 0:
+        return
 
+    doc.taxes = [
+        d for d in doc.get("taxes", [])
+        if d.account_head != "Miscellaneous Expenses - M"
+    ]
 
+    if doc.get("custom_other_charges"):
+        charges = flt(doc.get("custom_other_charges"))
+
+        doc.append("taxes", {
+            "charge_type": "Actual",
+            "account_head": "Miscellaneous Expenses - M",
+            "description": "Other Charges",
+            "tax_amount": charges,
+            "category": "Total",
+            "add_deduct_tax": "Add",
+            "included_in_print_rate": 0
+        })
+
+    doc.run_method("calculate_taxes_and_totals")
+
+    rounded_total = round(doc.grand_total + flt(doc.rounding_adjustment or 0))
+    doc.rounded_total = flt(rounded_total)
+    doc.in_words = money_in_words(doc.rounded_total)
+    doc.base_rounded_total = flt(doc.rounded_total * (doc.conversion_rate or 1))
+    doc.base_in_words = money_in_words(doc.base_rounded_total)
 
 @frappe.whitelist()
 def make_sales_invoice(docname):

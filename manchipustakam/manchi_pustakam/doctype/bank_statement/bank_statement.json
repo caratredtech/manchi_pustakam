@@ -1,0 +1,224 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-05-01 12:21:45.761002",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_okzn",
+  "naming_series",
+  "bank_account",
+  "branch",
+  "column_break_mbbj",
+  "account_type",
+  "currency",
+  "transaction_details_section",
+  "date",
+  "tran_id",
+  "utr_number",
+  "instr_id",
+  "column_break_xtop",
+  "deposits",
+  "withdrawals",
+  "balance",
+  "remarks",
+  "section_break_zxgo",
+  "bank_particulars",
+  "paymentreceiptcontra",
+  "paid_toreceived_from",
+  "narration",
+  "column_break_hb48",
+  "amount",
+  "balance_amount",
+  "bank_name_cash",
+  "second_ledger_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_okzn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "MANCHI PUSTAKAM - Union Bank of India",
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Bank Account",
+   "options": "Bank Account"
+  },
+  {
+   "default": "BTRN-.###",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "BTRN-.###"
+  },
+  {
+   "fetch_from": "bank_account.account_type",
+   "fetch_if_empty": 1,
+   "fieldname": "account_type",
+   "fieldtype": "Data",
+   "label": "Account Type"
+  },
+  {
+   "fetch_from": "bank_account.branch_code",
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch"
+  },
+  {
+   "default": "INR",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "column_break_mbbj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transaction_details_section",
+   "fieldtype": "Section Break",
+   "label": "Transaction Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "tran_id",
+   "fieldtype": "Data",
+   "label": "Tran Id"
+  },
+  {
+   "fieldname": "utr_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "UTR Number",
+   "unique": 1
+  },
+  {
+   "fieldname": "instr_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Instr. Id"
+  },
+  {
+   "default": "0",
+   "fieldname": "withdrawals",
+   "fieldtype": "Currency",
+   "label": "Withdrawals"
+  },
+  {
+   "default": "0",
+   "fieldname": "deposits",
+   "fieldtype": "Currency",
+   "label": "Deposits"
+  },
+  {
+   "default": "0",
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Balance"
+  },
+  {
+   "fieldname": "column_break_xtop",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_zxgo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bank_particulars",
+   "fieldtype": "Data",
+   "label": "Bank Particulars"
+  },
+  {
+   "fieldname": "paymentreceiptcontra",
+   "fieldtype": "Data",
+   "label": "Payment/Receipt/Contra"
+  },
+  {
+   "fieldname": "narration",
+   "fieldtype": "Small Text",
+   "label": "Narration"
+  },
+  {
+   "fieldname": "paid_toreceived_from",
+   "fieldtype": "Data",
+   "label": "Paid to/Received from"
+  },
+  {
+   "fieldname": "column_break_hb48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "balance_amount",
+   "fieldtype": "Currency",
+   "label": "Balance"
+  },
+  {
+   "fieldname": "bank_name_cash",
+   "fieldtype": "Data",
+   "label": "Bank Name/ Cash"
+  },
+  {
+   "fieldname": "second_ledger_name",
+   "fieldtype": "Data",
+   "label": "Second Ledger Name"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-05 16:59:09.165069",
+ "modified_by": "Administrator",
+ "module": "Manchi Pustakam",
+ "name": "Bank Statement",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

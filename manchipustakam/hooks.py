@@ -139,14 +139,17 @@ app_license = "mit"
 doc_events = {
     "Sales Invoice": {
         "on_update": "manchipustakam.api.sales.get_sales_invoice_data",
-        "on_submit": "manchipustakam.api.transactions.create_transaction"
+        "on_submit": "manchipustakam.api.transactions.create_transaction",
+        "on_update_after_submit": "manchipustakam.api.transactions.update_payment_reference_id"
     },
     "Quotation": {
         "on_update": "manchipustakam.api.sales.get_quotation_data",
-    }
+    },
+    "Purchase Invoice": {
+        "on_update": "manchipustakam.api.sales.get_purchase_invoice_data"
 }
 
-
+}
 # Scheduled Tasks
 # ---------------
 
@@ -257,4 +260,3 @@ doc_events = {
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
