@@ -26,6 +26,7 @@ def create_transaction(doc, method=None):
     pe.mode_of_payment = doc.custom_mode_of_payment
     pe.reference_no = doc.custom_reference_id or doc.name
     pe.reference_date = doc.posting_date
+    pe.set_remarks()
 
     for ref in pe.references:
         ref.allocated_amount = flt(doc.outstanding_amount)

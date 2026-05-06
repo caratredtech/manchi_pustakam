@@ -1,6 +1,6 @@
 {
  "app": "manchipustakam",
- "creation": "2026-04-02 04:13:27.415909",
+ "creation": "2026-05-04 11:37:01.093049",
  "docstatus": 0,
  "doctype": "Workspace Sidebar",
  "idx": 0,
@@ -8,22 +8,22 @@
   {
    "child": 0,
    "collapsible": 1,
-   "icon": "list",
+   "icon": "panel-top",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Manchipustakam",
+   "label": "Manchi Pustakam",
    "link_to": "manchipustakam",
    "link_type": "Page",
    "show_arrow": 0,
    "type": "Link"
   },
   {
-   "child": 0,
+   "child": 1,
    "collapsible": 1,
-   "icon": "book-text",
+   "icon": "\ud83d\udcda",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Book",
+   "label": "Books",
    "link_to": "Item",
    "link_type": "DocType",
    "show_arrow": 0,
@@ -54,7 +54,7 @@
    "type": "Link"
   },
   {
-   "child": 1,
+   "child": 0,
    "collapsible": 1,
    "icon": "list",
    "indent": 0,
@@ -119,6 +119,18 @@
    "icon": "list",
    "indent": 0,
    "keep_closed": 0,
+   "label": "Purchase Order",
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
    "label": "Purchase Receipt",
    "link_to": "Purchase Receipt",
    "link_type": "DocType",
@@ -126,7 +138,7 @@
    "type": "Link"
   },
   {
-   "child": 1,
+   "child": 0,
    "collapsible": 1,
    "icon": "list",
    "indent": 0,
@@ -155,44 +167,32 @@
    "icon": "list",
    "indent": 0,
    "keep_closed": 0,
+   "label": "Author",
+   "link_to": "Author",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Bank Statement",
+   "link_to": "Bank Statement",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
    "label": "Age Group",
    "link_to": "Age Group",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "list",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Language",
-   "link_to": "Languages",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "list",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Catalogue",
-   "link_to": "Catalogue",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "list",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Authors",
-   "link_to": "Author",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
@@ -233,9 +233,9 @@
    "type": "Link"
   },
   {
-   "child": 1,
+   "child": 0,
    "collapsible": 1,
-   "icon": "table",
+   "icon": "list",
    "indent": 0,
    "keep_closed": 0,
    "label": "Stock Availability Report",
@@ -243,9 +243,21 @@
    "link_type": "Report",
    "show_arrow": 0,
    "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Bank Transactions Details",
+   "link_to": "Bank Transactions Details",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-04-24 10:32:45.436664",
+ "modified": "2026-05-06 10:11:40.921104",
  "modified_by": "Administrator",
  "module": "Manchi Pustakam",
  "name": "Manchi Pustakam",
