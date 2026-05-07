@@ -139,7 +139,8 @@ app_license = "mit"
 doc_events = {
     "Sales Invoice": {
         "on_update": "manchipustakam.api.sales.get_sales_invoice_data",
-        "on_submit": "manchipustakam.api.transactions.create_transaction",
+        "on_submit": ["manchipustakam.api.transactions.create_transaction",
+                      "manchipustakam.api.sales.update_quotation_status_on_sales_invoice_submit"],
         "on_update_after_submit": "manchipustakam.api.transactions.update_payment_reference_id"
     },
     "Quotation": {

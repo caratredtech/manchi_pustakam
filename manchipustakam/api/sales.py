@@ -137,6 +137,7 @@ def make_sales_invoice(docname):
     def set_missing_values(source, target):
         target.customer = source.party_name
         target.currency = source.currency
+        target.custom_quotation = source.name
 
         for item in target.items:
             if not item.income_account:
@@ -175,3 +176,13 @@ def make_sales_invoice(docname):
     }, None, set_missing_values)
 
     return doc
+
+
+def update_quotation_status_on_sales_invoice_submit(doc, method=None):
+    if doc.docstatus != 1:
+        return
+
+    if doc.custom_quotation:
+        frappe.db.set_value("Quotation", doc.custom_quotation, "status", "Ordered")
+        quotation = frappe.get_doc("Quotation", doc.custom_quotation)
+        quotation.reload()

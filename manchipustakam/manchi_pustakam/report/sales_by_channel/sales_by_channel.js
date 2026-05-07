@@ -18,8 +18,8 @@ frappe.query_reports["Sales by Channel"] = {
 		{
 			fieldname: "sales_channel",
 			label: "Sales Channel",
-			fieldtype: "Select",
-			options: "\nCounter Sales\nShopping Cart Sales\nExhibition Sales\nBulk/ Institutional Sales",
+			fieldtype: "Link",
+			options: "Sales Channel",
 			default: ""
 		},
 		{
@@ -27,6 +27,18 @@ frappe.query_reports["Sales by Channel"] = {
 			label: "Customer",
 			fieldtype: "Link",
 			options: "Customer"
+		},
+		{
+			fieldname: "customer_type",
+			label: "Customer Type",
+			fieldtype: "Select",
+			options: "\nIndividual\nIndividual Donor\nInstitution\nInstitutional Donor"
+		},
+		{
+			fieldname: "customer_group",
+			label: "Customer Group",
+			fieldtype: "Link",
+			options: "Customer Group"
 		}
 	]
 };
