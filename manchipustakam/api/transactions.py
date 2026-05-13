@@ -35,6 +35,24 @@ def create_transaction(doc, method=None):
     pe.submit()
     doc.reload()
 
+    if flt(doc.outstanding_amount) <= 0:
+        for schedule in doc.payment_schedule:
+            frappe.db.set_value(
+                "Payment Schedule",
+                schedule.name,
+                {
+                    "paid_amount": schedule.payment_amount,
+                    "outstanding": 0,
+                    "base_paid_amount": schedule.base_payment_amount,
+                    "base_outstanding": 0,
+                },
+                update_modified=False,
+            )
+
+    doc.set_status(update=True)
+    doc.reload()
+    doc.notify_update()
+
 
 def update_payment_reference_id(doc, method=None):
     if doc.docstatus != 1:
