@@ -85,12 +85,9 @@ doctype_list_js = {
 # 	"methods": "manchipustakam.utils.jinja_methods",
 # 	"filters": "manchipustakam.utils.jinja_filters"
 # }
-# fixtures = [
-#     "Custom Field",
-#     "Property Setter",
-#     "Workspace",
-#     "Translation"
-# ]
+fixtures = [
+    "Property Setter"
+]
 # Installation
 # ------------
 
