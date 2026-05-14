@@ -5,8 +5,7 @@
 			margin: 8mm;
 		}
 
-		html,
-		body {
+		html, body {
 			margin: 0;
 			padding: 0;
 		}
@@ -19,37 +18,20 @@
 			display: table-footer-group;
 		}
 
-		table {
-			page-break-inside: auto;
+		table, tr, td, th {
+			page-break-inside: avoid !important;
 		}
 
 		tr {
-			page-break-inside: avoid;
 			page-break-after: auto;
-			break-inside: avoid;
 		}
 
-		th,
-		td {
-			break-inside: avoid;
-		}
-
-		.book-catalogue-print .catalogue-page {
-			display: block;
-			page-break-inside: avoid;
-			break-inside: avoid;
+		.catalogue-page {
 			page-break-after: always;
-			break-after: page;
 		}
 
-		.book-catalogue-print .catalogue-page:last-child {
+		.catalogue-page:last-child {
 			page-break-after: auto;
-			break-after: auto;
-		}
-
-		.book-catalogue-print .catalogue-page:not(:first-child) {
-			page-break-before: always;
-			break-before: page;
 		}
 
 		.no-print {
@@ -64,254 +46,238 @@
 		line-height: 1.25;
 	}
 
-	.book-catalogue-print .catalogue-page {
+	.catalogue-page {
 		width: 100%;
 	}
 
-	.book-catalogue-print .header-wrap {
-		align-items: flex-start;
-		display: grid;
-		gap: 12px;
-		grid-template-columns: 70px 1fr 34%;
+	/* ✅ TABLE-BASED HEADER (instead of grid) */
+	.header-wrap {
+		display: table;
+		width: 100%;
+		margin-bottom: 8px;
 	}
 
-	.book-catalogue-print .brand-block {
-		align-items: center;
-		display: flex;
-		justify-content: flex-start;
+	.header-wrap > div {
+		display: table-cell;
+		vertical-align: top;
 	}
 
-	.book-catalogue-print .logo-box {
-		align-items: center;
-		border: 1px solid #d1d5db;
-		border-radius: 6px;
-		display: flex;
-		height: 52px;
-		justify-content: center;
-		padding: 4px;
-		width: 52px;
+	.brand-block {
+		width: 70px;
 	}
 
-	.book-catalogue-print .logo-box img {
-		max-height: 42px;
-		max-width: 42px;
-	}
-
-	.book-catalogue-print .title-block {
-		align-self: center;
+	.title-block {
 		text-align: center;
 	}
 
-	.book-catalogue-print .address-block {
-		align-self: start;
+	.address-block {
+		width: 34%;
+		text-align: right;
 		color: #4b5563;
 		font-size: 10px;
 		line-height: 1.45;
-		text-align: right;
 	}
 
-	.book-catalogue-print .header {
-		border-bottom: 2px solid #111827;
-		margin-bottom: 10px;
-		padding-bottom: 8px;
+	.logo-box {
+		border: 1px solid #d1d5db;
+		border-radius: 6px;
+		height: 52px;
+		width: 52px;
 		text-align: center;
 	}
 
-	.book-catalogue-print .title {
+	.logo-box img {
+		max-height: 42px;
+		max-width: 42px;
+		margin-top: 4px;
+	}
+
+	.header {
+		border-bottom: 2px solid #111827;
+		margin-bottom: 10px;
+		padding-bottom: 8px;
+	}
+
+	.title {
 		font-size: 18px;
 		font-weight: 700;
 		text-transform: uppercase;
 	}
 
-	.book-catalogue-print .subtitle {
+	.subtitle {
 		color: #4b5563;
 		font-size: 11px;
 		margin-top: 3px;
 	}
 
-	.book-catalogue-print .meta {
+	.meta {
 		margin: 8px 0 10px;
 		overflow: hidden;
 	}
 
-	.book-catalogue-print .filters {
+	.filters {
 		margin-bottom: 10px;
 	}
 
-	.book-catalogue-print .filter {
+	.filter {
 		border: 1px solid #d1d5db;
-		border-radius: 3px;
 		display: inline-block;
 		margin: 0 4px 5px 0;
 		padding: 3px 6px;
 	}
 
-	.book-catalogue-print .pull-left {
+	.pull-left {
 		float: left;
 	}
 
-	.book-catalogue-print .pull-right {
+	.pull-right {
 		float: right;
 	}
 
-	.book-catalogue-print .filter-label {
-		color: #6b7280;
-		font-weight: 600;
-	}
-
 	.book-catalogue-print table {
-		border-collapse: separate;
-		border-bottom: 1px solid #9ca3af;
-		border-right: 1px solid #9ca3af;
-		border-spacing: 0;
-		table-layout: fixed;
+		border-collapse: collapse;
 		width: 100%;
+		table-layout: fixed;
 	}
 
-	.book-catalogue-print th {
+	th {
 		background: #f3f4f6;
-		border-bottom: 0;
-		border-left: 1px solid #9ca3af;
-		border-right: 0;
-		border-top: 1px solid #9ca3af;
 		font-size: 8.5px;
 		font-weight: 700;
-		padding: 3px 2px;
+		padding: 3px;
 		text-align: left;
-		text-transform: uppercase;
-		vertical-align: middle;
+		border: 1px solid #9ca3af;
 	}
 
-	.book-catalogue-print td {
-		border-bottom: 0;
-		border-left: 1px solid #d1d5db;
-		border-right: 0;
-		border-top: 1px solid #d1d5db;
-		padding: 3px 2px;
-		vertical-align: top;
+	td {
+		padding: 3px;
+		border: 1px solid #d1d5db;
 		word-wrap: break-word;
 	}
 
-	.book-catalogue-print .num,
-	.book-catalogue-print .currency {
+	.num, .currency {
 		text-align: right;
 	}
 
-	.book-catalogue-print .center {
+	.center {
 		text-align: center;
 	}
 
-	.book-catalogue-print .muted {
+	.muted {
 		color: #6b7280;
 	}
 </style>
 
 <div class="book-catalogue-print">
-	{%
-		var page_capacity = 36;
-		var pages = [];
-		var current_page = [];
 
-		for (var row_index = 0; row_index < (data || []).length; row_index++) {
-			if (current_page.length && current_page.length >= page_capacity) {
-				pages.push(current_page);
-				current_page = [];
-			}
-			current_page.push({ row: data[row_index], index: row_index });
-		}
+{% 
+	var page_capacity = 36;
+	var pages = [];
+	var current_page = [];
 
-		if (current_page.length || !pages.length) {
+	for (var i = 0; i < (data || []).length; i++) {
+		if (current_page.length >= page_capacity) {
 			pages.push(current_page);
+			current_page = [];
 		}
-	%}
-	{% for (var page = 0; page < pages.length; page++) { %}
-		<div class="catalogue-page">
-			<div class="header">
-				<div class="header-wrap">
-					<div class="brand-block">
-						{% if (header_info.logo) { %}
-							<div class="logo-box"><img src="{%= header_info.logo %}" alt="Logo"></div>
-						{% } %}
-					</div>
-					<div class="title-block">
-						<div class="title">{%= header_info.title %}</div>
-						<div class="subtitle">{%= header_info.company_name || header_info.subtitle %}</div>
-					</div>
-					<div class="address-block">
-						{% for (var addr_i = 0; addr_i < (header_info.address_lines || []).length; addr_i++) { %}
-							<div>{%= header_info.address_lines[addr_i] %}</div>
-						{% } %}
-					</div>
-				</div>
-			</div>
+		current_page.push({ row: data[i], index: i });
+	}
 
-			<div class="meta">
-				<div class="pull-left"><b>{%= __("Total Books") %}:</b> {%= data.length %}</div>
-				<div class="muted pull-right">
-					{%= __("Printed on {0}", [frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string())]) %}
-				</div>
-			</div>
+	if (current_page.length || !pages.length) {
+		pages.push(current_page);
+	}
+%}
 
-			<div class="filters">
-				{% if (filters.publisher_type) { %}
-					<div class="filter"><span class="filter-label">{%= __("Publisher") %}:</span> {%= filters.publisher_type %}</div>
-				{% } %}
-				{% if (filters.age_group) { %}
-					<div class="filter"><span class="filter-label">{%= __("Age Group") %}:</span> {%= filters.age_group %}</div>
-				{% } %}
-				{% if (filters.subject) { %}
-					<div class="filter"><span class="filter-label">{%= __("Subject") %}:</span> {%= filters.subject %}</div>
-				{% } %}
-				{% if (filters.language) { %}
-					<div class="filter"><span class="filter-label">{%= __("Language") %}:</span> {%= filters.language %}</div>
-				{% } %}
-				{% if (filters.catalogue) { %}
-					<div class="filter"><span class="filter-label">{%= __("Catalogue") %}:</span> {%= filters.catalogue %}</div>
-				{% } %}
-				{% if (!(filters.publisher_type || filters.age_group || filters.subject || filters.language || filters.catalogue)) { %}
-					<div class="filter"><span class="filter-label">{%= __("Filters") %}:</span> {%= __("All Books") %}</div>
+{% for (var page = 0; page < pages.length; page++) { %}
+
+<div class="catalogue-page">
+
+	<div class="header">
+		<div class="header-wrap">
+
+			<div class="brand-block">
+				{% if (header_info.logo) { %}
+					<div class="logo-box">
+						<img src="{%= header_info.logo %}">
+					</div>
 				{% } %}
 			</div>
 
-			<table>
-				<thead>
-					<tr>
-						<th style="width: 4%">{%= __("S.No") %}</th>
-						<th style="width: 26%">{%= __("Title") %}</th>
-						<th style="width: 16%">{%= __("Author") %}</th>
-						<th style="width: 13%">{%= __("Publisher") %}</th>
-						<th style="width: 7%">{%= __("Year") %}</th>
-						<th style="width: 7%">{%= __("Pages") %}</th>
-						<th style="width: 9%">{%= __("Price") %}</th>
-						<th style="width: 11%">{%= __("Subject") %}</th>
-						<th style="width: 8%">{%= __("Language") %}</th>
-						<th style="width: 9%">{%= __("Age Group") %}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for (var row_pos = 0; row_pos < pages[page].length; row_pos++) { %}
-						{% var item = pages[page][row_pos].row; %}
-						{% var item_index = pages[page][row_pos].index; %}
-						<tr>
-							<td class="center">{%= item_index + 1 %}</td>
-							<td><b>{%= item.item_name || "" %}</b></td>
-							<td>{%= item.custom_author || "" %}</td>
-							<td>{%= item.publisher || "" %}</td>
-							<td class="center">{%= item.year || "" %}</td>
-							<td class="num">{%= item.pages || "" %}</td>
-							<td class="currency">
-								{% if (item.standard_selling_price) { %}
-									{%= (item.standard_selling_price) %}
-								{% } %}
-							</td>
-							<td>{%= item.subject || "" %}</td>
-							<td>{%= item.language || "" %}</td>
-							<td>{%= item.age_group || "" %}</td>
-						</tr>
-					{% } %}
-				</tbody>
-			</table>
+			<div class="title-block">
+				<div class="title">{%= header_info.title %}</div>
+				<div class="subtitle">{%= header_info.company_name || header_info.subtitle %}</div>
+			</div>
+
+			<div class="address-block">
+				{% for (var a = 0; a < (header_info.address_lines || []).length; a++) { %}
+					<div>{%= header_info.address_lines[a] %}</div>
+				{% } %}
+			</div>
+
 		</div>
-	{% } %}
+	</div>
+
+	<div class="meta">
+		<div class="pull-left">
+			<b>{%= __("Total Books") %}:</b> {%= data.length %}
+		</div>
+		<div class="muted pull-right">
+			{%= __("Printed on {0}", [frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string())]) %}
+		</div>
+	</div>
+
+	<div class="filters">
+		{% if (filters.publisher_type) { %}
+			<div class="filter"><b>Publisher:</b> {%= filters.publisher_type %}</div>
+		{% } %}
+		{% if (filters.age_group) { %}
+			<div class="filter"><b>Age:</b> {%= filters.age_group %}</div>
+		{% } %}
+		{% if (filters.subject) { %}
+			<div class="filter"><b>Subject:</b> {%= filters.subject %}</div>
+		{% } %}
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th style="width:4%">S.No</th>
+				<th style="width:26%">Title</th>
+				<th style="width:16%">Author</th>
+				<th style="width:13%">Publisher</th>
+				<th style="width:7%">Year</th>
+				<th style="width:7%">Pages</th>
+				<th style="width:9%">Price</th>
+				<th style="width:11%">Subject</th>
+				<th style="width:8%">Language</th>
+				<th style="width:9%">Age</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for (var j = 0; j < pages[page].length; j++) { %}
+				{% var item = pages[page][j].row; %}
+				{% var idx = pages[page][j].index; %}
+
+				<tr>
+					<td class="center">{%= idx + 1 %}</td>
+					<td><b>{%= item.item_name || "" %}</b></td>
+					<td>{%= item.custom_author || "" %}</td>
+					<td>{%= item.publisher || "" %}</td>
+					<td class="center">{%= item.year || "" %}</td>
+					<td class="num">{%= item.pages || "" %}</td>
+					<td class="currency">{%= item.standard_selling_price || "" %}</td>
+					<td>{%= item.subject || "" %}</td>
+					<td>{%= item.language || "" %}</td>
+					<td>{%= item.age_group || "" %}</td>
+				</tr>
+
+			{% } %}
+		</tbody>
+	</table>
+
 </div>
-	
+
+{% } %}
+
+</div>
