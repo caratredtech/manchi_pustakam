@@ -2,12 +2,93 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe.desk.utils import provide_binary_file
+from frappe.utils.xlsxutils import make_xlsx
 
 def execute(filters=None):
     filters = filters or {}
     columns = get_columns()
     data = get_data(filters)
     return columns, data
+
+@frappe.whitelist()
+def download_excel(filters=None):
+    filters = frappe.parse_json(filters or "{}")
+    columns = get_columns()
+    data = get_data(filters)
+    header_info = get_header_info()
+
+    xlsx_data = [
+        [header_info["title"]],
+        [header_info["company_name"]],
+    ]
+
+    for address_line in header_info["address_lines"]:
+        xlsx_data.append([address_line])
+
+    xlsx_data.append([])
+    header_index = len(xlsx_data)
+    xlsx_data.append([column["label"] for column in columns])
+
+    for row in data:
+        xlsx_data.append([row.get(column["fieldname"]) for column in columns])
+
+    column_widths = [max(10, min(40, int((column.get("width") or 100) / 7))) for column in columns]
+    content = make_xlsx(
+        xlsx_data,
+        "Book Catalogue",
+        column_widths=column_widths,
+        header_index=header_index,
+    ).getvalue()
+
+    provide_binary_file("Manchi Pustakam Catalogue", "xlsx", content)
+
+def get_header_info():
+    default_company = frappe.defaults.get_defaults().get("company") or frappe.db.get_single_value("Global Defaults", "default_company")
+    header_info = {
+        "title": "Manchi Pustakam Catalogue",
+        "company_name": default_company or "Manchi Pustakam",
+        "address_lines": [],
+    }
+
+    if default_company:
+        company = frappe.db.get_value("Company", default_company, ["company_name"], as_dict=True)
+        if company:
+            header_info["company_name"] = company.company_name or header_info["company_name"]
+
+        address = frappe.db.sql(
+            """
+            SELECT
+                a.address_line1,
+                a.address_line2,
+                a.city,
+                a.state,
+                a.pincode,
+                a.country
+            FROM `tabAddress` a
+            INNER JOIN `tabDynamic Link` dl ON dl.parent = a.name
+            WHERE dl.link_doctype = 'Company'
+                AND dl.link_name = %(company)s
+                AND dl.parenttype = 'Address'
+            ORDER BY a.is_primary_address DESC, a.creation ASC
+            LIMIT 1
+            """,
+            {"company": default_company},
+            as_dict=True,
+        )
+
+        if address:
+            address = address[0]
+            city_line = ", ".join(filter(None, [address.city, address.state, address.pincode]))
+            header_info["address_lines"] = [
+                address.address_line1,
+                address.address_line2,
+                city_line,
+                address.country,
+            ]
+            header_info["address_lines"] = [line for line in header_info["address_lines"] if line]
+
+    return header_info
 
 def get_columns():
     return [

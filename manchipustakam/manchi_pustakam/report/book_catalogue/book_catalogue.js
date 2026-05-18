@@ -39,23 +39,10 @@ frappe.query_reports["Book Catalogue"] = {
 
         report.download_book_catalogue_excel = function() {
             const filters = this.get_filter_values(true);
-            const applied_filters = this.get_applied_filters(filters);
-            const visible_idx = this.datatable?.bodyRenderer.visibleRowIndices || [];
-
-            if (visible_idx.length + 1 === this.data?.length) {
-                visible_idx.push(visible_idx.length);
-            }
 
             open_url_post(frappe.request.url, {
-                cmd: "frappe.desk.query_report.export_query",
-                report_name: this.report_name,
-                custom_columns: this.custom_columns?.length ? this.custom_columns : [],
-                file_format_type: "Excel",
-                filters: filters,
-                applied_filters: applied_filters,
-                visible_idx: visible_idx,
-                include_filters: 1,
-                include_hidden_columns: 0
+                cmd: "manchipustakam.manchi_pustakam.report.book_catalogue.book_catalogue.download_excel",
+                filters: JSON.stringify(filters || {})
             });
         };
 
