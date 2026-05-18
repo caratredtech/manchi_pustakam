@@ -58,7 +58,7 @@ def get_data(filters):
             i.brand AS publisher,
             i.custom_year_of_publication AS year,
             i.custom_pages AS pages,
-            i.standard_rate AS standard_selling_price,
+            ip.price_list_rate AS standard_selling_price,
             i.item_group AS subject,
             i.custom_languages AS language,
             i.custom_age_group AS age_group,
@@ -66,6 +66,14 @@ def get_data(filters):
             i.custom_store_rack_no AS rack_no,
             i.custom_series AS series
         FROM `tabItem` i
+        LEFT JOIN (
+            SELECT
+                item_code,
+                MAX(price_list_rate) AS price_list_rate
+            FROM `tabItem Price`
+            WHERE selling = 1
+            GROUP BY item_code
+        ) ip ON ip.item_code = i.name
         WHERE {where_clause}
         ORDER BY series ASC
     """

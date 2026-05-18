@@ -14,24 +14,24 @@
 			display: table-header-group !important;
 		}
 
-		tfoot {
-			display: table-footer-group;
-		}
-
-		table, tr, td, th {
-			page-break-inside: avoid !important;
+		tbody {
+			display: table-row-group;
 		}
 
 		tr {
+			page-break-inside: avoid !important;
+			break-inside: avoid !important;
 			page-break-after: auto;
 		}
 
 		.catalogue-page {
 			page-break-after: always;
+			break-after: page;
 		}
 
 		.catalogue-page:last-child {
 			page-break-after: auto;
+			break-after: auto;
 		}
 
 		.no-print {
@@ -135,24 +135,44 @@
 	}
 
 	.book-catalogue-print table {
-		border-collapse: collapse;
+		border-collapse: separate;
+		border-spacing: 0;
+		page-break-inside: auto;
 		width: 100%;
 		table-layout: fixed;
+	}
+
+	.book-catalogue-print tbody {
+		page-break-inside: auto;
+	}
+
+	.book-catalogue-print thead tr {
+		page-break-inside: avoid;
 	}
 
 	th {
 		background: #f3f4f6;
 		font-size: 8.5px;
 		font-weight: 700;
-		padding: 3px;
+		line-height: 1.35;
+		padding: 4px 3px;
 		text-align: left;
 		border: 1px solid #9ca3af;
+		vertical-align: top;
 	}
 
 	td {
-		padding: 3px;
+		line-height: 1.35;
+		padding: 4px 3px;
 		border: 1px solid #d1d5db;
+		border-left: 0;
+		border-top: 0;
+		vertical-align: top;
 		word-wrap: break-word;
+	}
+
+	td:first-child {
+		border-left: 1px solid #d1d5db;
 	}
 
 	.num, .currency {
@@ -171,7 +191,7 @@
 <div class="book-catalogue-print">
 
 {% 
-	var page_capacity = 36;
+	var page_capacity = 40;
 	var pages = [];
 	var current_page = [];
 
@@ -180,6 +200,7 @@
 			pages.push(current_page);
 			current_page = [];
 		}
+
 		current_page.push({ row: data[i], index: i });
 	}
 
@@ -192,68 +213,81 @@
 
 <div class="catalogue-page">
 
-	<div class="header">
-		<div class="header-wrap">
+	{% if (page === 0) { %}
+		<div class="header">
+			<div class="header-wrap">
 
-			<div class="brand-block">
-				{% if (header_info.logo) { %}
-					<div class="logo-box">
-						<img src="{%= header_info.logo %}">
-					</div>
-				{% } %}
+				<div class="brand-block">
+					{% if (header_info.logo) { %}
+						<div class="logo-box">
+							<img src="{%= header_info.logo %}">
+						</div>
+					{% } %}
+				</div>
+
+				<div class="title-block">
+					<div class="title">{%= header_info.title %}</div>
+					<div class="subtitle">{%= header_info.company_name || header_info.subtitle %}</div>
+				</div>
+
+				<div class="address-block">
+					{% for (var a = 0; a < (header_info.address_lines || []).length; a++) { %}
+						<div>{%= header_info.address_lines[a] %}</div>
+					{% } %}
+				</div>
+
 			</div>
+		</div>
 
-			<div class="title-block">
-				<div class="title">{%= header_info.title %}</div>
-				<div class="subtitle">{%= header_info.company_name || header_info.subtitle %}</div>
+		<div class="meta">
+			<div class="pull-left">
+				<b>{%= __("Total Books") %}:</b> {%= data.length %}
 			</div>
-
-			<div class="address-block">
-				{% for (var a = 0; a < (header_info.address_lines || []).length; a++) { %}
-					<div>{%= header_info.address_lines[a] %}</div>
-				{% } %}
+			<div class="muted pull-right">
+				{%= __("Printed on {0}", [frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string())]) %}
 			</div>
-
 		</div>
-	</div>
 
-	<div class="meta">
-		<div class="pull-left">
-			<b>{%= __("Total Books") %}:</b> {%= data.length %}
+		<div class="filters">
+			{% if (filters.publisher_type) { %}
+				<div class="filter"><b>Publisher:</b> {%= filters.publisher_type %}</div>
+			{% } %}
+			{% if (filters.age_group) { %}
+				<div class="filter"><b>Age:</b> {%= filters.age_group %}</div>
+			{% } %}
+			{% if (filters.subject) { %}
+				<div class="filter"><b>Subject:</b> {%= filters.subject %}</div>
+			{% } %}
 		</div>
-		<div class="muted pull-right">
-			{%= __("Printed on {0}", [frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string())]) %}
-		</div>
-	</div>
-
-	<div class="filters">
-		{% if (filters.publisher_type) { %}
-			<div class="filter"><b>Publisher:</b> {%= filters.publisher_type %}</div>
-		{% } %}
-		{% if (filters.age_group) { %}
-			<div class="filter"><b>Age:</b> {%= filters.age_group %}</div>
-		{% } %}
-		{% if (filters.subject) { %}
-			<div class="filter"><b>Subject:</b> {%= filters.subject %}</div>
-		{% } %}
-	</div>
+	{% } %}
 
 	<table>
+		<colgroup>
+			<col style="width:4%">
+			<col style="width:26%">
+			<col style="width:16%">
+			<col style="width:13%">
+			<col style="width:7%">
+			<col style="width:7%">
+			<col style="width:9%">
+			<col style="width:11%">
+			<col style="width:8%">
+			<col style="width:9%">
+		</colgroup>
 		<thead>
 			<tr>
-				<th style="width:4%">S.No</th>
-				<th style="width:26%">Title</th>
-				<th style="width:16%">Author</th>
-				<th style="width:13%">Publisher</th>
-				<th style="width:7%">Year</th>
-				<th style="width:7%">Pages</th>
-				<th style="width:9%">Price</th>
-				<th style="width:11%">Subject</th>
-				<th style="width:8%">Language</th>
-				<th style="width:9%">Age</th>
+				<th>S.No</th>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Publisher</th>
+				<th>Year</th>
+				<th>Pages</th>
+				<th>Price</th>
+				<th>Subject</th>
+				<th>Language</th>
+				<th>Age</th>
 			</tr>
 		</thead>
-
 		<tbody>
 			{% for (var j = 0; j < pages[page].length; j++) { %}
 				{% var item = pages[page][j].row; %}
